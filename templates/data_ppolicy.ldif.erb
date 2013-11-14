@@ -1,0 +1,8 @@
+
+dn: olcOverlay=ppolicy,olcDatabase={2}bdb,cn=config
+olcOverlay: ppolicy
+objectClass: olcOverlayConfig
+objectClass: olcPPolicyConfig
+olcPPolicyDefault: cn=default,ou=policies,<%=@suffix%>
+olcPPolicyHashCleartext: TRUE
+olcPPolicyUseLockout: FALSE

@@ -1,0 +1,8 @@
+
+dn:  olcDatabase={2}bdb,cn=config
+changetype: modify
+replace: olcSuffix
+olcSuffix: <%=@suffix%>
+-
+replace: olcRootDN
+olcRootDN: <%=@rootdn%>

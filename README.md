@@ -1,4 +1,16 @@
-puppet-openldap
-===============
+openldap
 
-Puppet module for OpenLDAP with multi-master replicatoin using OLC config.
+This is the openldap module.
+
+License
+-------
+
+
+Contact
+-------
+
+
+Support
+-------
+
+Please log tickets and issues at our [Projects site](http://projects.example.com)

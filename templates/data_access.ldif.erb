@@ -1,0 +1,10 @@
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to *
+  by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage
+  by dn.exact="cn=admin,cn=config" manage
+  by dn.exact="cn=config" manage
+  by dn.exact="<%=@rootdn%>" manage
+  by * none

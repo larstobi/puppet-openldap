@@ -1,0 +1,30 @@
+
+dn: olcOverlay=syncprov,olcDatabase={2}bdb,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+add: olcSyncRepl
+<% @serverurls.each do |server| -%>
+olcSyncRepl: rid=00<%= server['id'] %> provider=<%=server['url']%> binddn="cn=config" bindmethod=simple
+  credentials=<%=@rootpw%> searchbase="<%=@suffix%>" type=refreshAndPersist
+  retry="5 5 300 5" timeout=1
+<% end -%>
+-
+add: olcLimits
+olcLimits: dn.exact="<%=@rootdn%>" time.soft=unlimited time.hard=unlimited size.soft=unlimited size.hard=unlimited
+-
+add: olcLimits
+olcLimits: dn.exact="cn=config" time.soft=unlimited time.hard=unlimited size.soft=unlimited size.hard=unlimited
+-
+add: olcDbIndex
+olcDbIndex: entryUUID eq
+-
+add: olcDbIndex
+olcDbIndex: entryCSN eq
+-
+add: olcMirrorMode
+olcMirrorMode: TRUE
