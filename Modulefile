@@ -1,11 +1,9 @@
 name    'larstobi-openldap'
 version '0.0.1'
-source 'UNKNOWN'
-author 'larstobi'
+source 'git://github.com/larstobi/puppet-openldap.git'
+author 'Lars Tobias Skjong-Børsting'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
-
-## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+summary 'Puppet module for OpenLDAP'
+description 'Puppet module for OpenLDAP with multi-master replication using OLC config.'
+project_page 'https://github.com/larstobi/puppet-openldap'
+dependency 'puppetlabs/firewall'
