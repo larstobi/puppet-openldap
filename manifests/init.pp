@@ -42,7 +42,7 @@ class openldap (
   $service    = hiera('openldap::service',   'slapd'),
   $ldap_conf  = hiera('openldap::ldap_conf', 'puppet:///modules/openldap/ldap.conf'),
   $slapd_conf = hiera('openldap::slapd_conf', undef),
-  $db_config  = hiera('openldap::db_config',  undef),
+  $db_config  = hiera('openldap::db_config',  'puppet:///modules/openldap/DB_CONFIG'),
   $logdir     = hiera('openldap::logdir',    '/var/log/openldap'),
   $logfile    = hiera('openldap::logfile',   '/var/log/openldap/slapd.log'),
   $schema     = hiera_array('openldap::schema', undef),
