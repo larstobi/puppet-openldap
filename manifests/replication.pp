@@ -21,6 +21,8 @@ class openldap::replication (
   $data_repl_ldif          = template('openldap/data_replication.ldif.erb')
   $data_ppolicy_ldif       = template('openldap/data_ppolicy.ldif.erb')
   $mod_ppolicy             = template('openldap/mod_ppolicy.ldif.erb')
+  $mod_memberof            = template('openldap/mod_memberof.ldif.erb')
+  $data_memberof           = template('openldap/data_memberof.ldif.erb')
   $config_loglevel_ldif    = template('openldap/loglevel.ldif.erb')
   $acl_bdb_external        = template('openldap/acl_bdb_external.ldif.erb')
 
@@ -104,5 +106,17 @@ class openldap::replication (
     'add data ppolicy':
       command => "${ldapadd} -D 'cn=admin,cn=config'<<EOF${data_ppolicy_ldif}EOF",
       unless  => "${ldapsearch} 'olcOverlay={1}ppolicy' olcPPolicyDefault |grep '^olcPPolicyDefault:\\ '";
+  }
+  ->
+  exec {
+    'include memberof module':
+      command => "${ldapadd} -D 'cn=admin,cn=config'<<EOF${mod_memberof}EOF",
+      unless  => "${ldapsearch} ObjectClass=olcModuleList olcModuleLoad | grep '^olcModuleLoad:.*memberof.la$'";
+  }
+  ->
+  exec {
+    'add data memberof':
+      command => "${ldapadd} -D 'cn=admin,cn=config'<<EOF${data_memberof}EOF",
+      unless  => "${ldapsearch} olcOverlay=memberof olcMemberOfRefInt | grep ^olcMemberOfRefInt:";
   }
 }
